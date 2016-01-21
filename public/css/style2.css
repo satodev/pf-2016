@@ -1,0 +1,155 @@
+
+@media only screen and (max-width: 120px) {
+	#main_menu{
+		display:block;
+		width : 30%;
+		float: left;
+		background-color:purple;
+		top: 0;
+		bottom:0;
+		margin:0;
+		padding:0;
+	}
+	#main_menu a{
+		display: block;
+		text-align: center;
+		margin-top: 5px;
+	}
+	#main_menu a img{
+		width : 50%;
+		margin: 0 auto;
+	}
+	#main_menu ul{
+		margin:0;
+		padding:0;
+		list-style: none;
+		margin: 0 auto;
+	}
+	#main_menu ul li{
+		margin:0;
+		padding: 0;
+		background-color: green;
+		text-align: center;
+	}
+	.content{
+		float: left;
+		background-color:red;
+		width :70%;
+	}
+
+}
+@media screen and (min-width: 768px) and (max-width:992px){
+	#main_menu{
+		display:block;
+		width : 20%;
+		float: left;
+		background-color:yellow;
+		top: 0;
+		bottom:0;
+		margin:0;
+		padding:0;
+	}
+	#main_menu a{
+		display: block;
+		text-align: center;
+		margin-top: 5px;
+	}
+	#main_menu a img{
+		width : 50%;
+		margin: 0 auto;
+	}
+	#main_menu ul{
+		margin:0;
+		padding:0;
+		list-style: none;
+		margin: 0 auto;
+	}
+	#main_menu ul li{
+		margin:0;
+		padding: 0;
+		background-color: green;
+		text-align: center;
+	}
+	.content{
+		float: left;
+		background-color:red;
+		width :80%;
+	}
+
+}
+@media screen and (min-width: 992px) and (max-width:1199px){
+	#main_menu{
+		display:block;
+		width : 15%;
+		float: left;
+		background-color:pink;
+		top: 0;
+		bottom:0;
+		margin:0;
+		padding:0;
+	}
+	#main_menu a{
+		display: block;
+		text-align: center;
+		margin-top: 5px;
+	}
+	#main_menu a img{
+		width : 50%;
+		margin: 0 auto;
+	}
+	#main_menu ul{
+		margin:0;
+		padding:0;
+		list-style: none;
+		margin: 0 auto;
+	}
+	#main_menu ul li{
+		margin:0;
+		padding: 0;
+		background-color: green;
+		text-align: center;
+	}
+	.content{
+		float: left;
+		background-color:red;
+		width :70%;
+	}
+
+}
+@media screen and (min-width: 1200px){
+	#main_menu{
+		display:block;
+		width : 12.5%;
+		float: left;
+		background-color: black;
+		top: 0;
+		bottom:0;
+	}
+	#main_menu a{
+		display: block;
+		text-align: center;
+		margin-top: 5px;
+		font-size:3rem;
+	}
+	#main_menu a img{
+		width : 50%;
+		margin: 0 auto;
+	}
+	#main_menu ul{
+		margin:0;
+		padding:0;
+		list-style: none;
+		margin: 0 auto;
+	}
+	#main_menu ul li{
+		margin:0;
+		padding: 0;
+		background-color:darkgrey;
+		text-align: center;
+	}
+	.content{
+		float: left;
+		background-color:red;
+		width :87.5%;
+	}
+}
