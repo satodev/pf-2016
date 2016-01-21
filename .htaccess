@@ -1,0 +1,2 @@
+DirectoryIndex public/index.php
+#ErrorDocument 404 /pf-2016/public/index.php
