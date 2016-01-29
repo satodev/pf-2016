@@ -189,13 +189,13 @@
 	color: #f40233;
 }
 .breadCrumbWhite{
-	border-left: 1px solid white;
+	border-left: 3px solid white;
 }
 .breadCrumbBlue{
-	border-left: 1px solid #02ACF4;
+	border-left: 3px solid #02ACF4;
 }
 .breadCrumbRed{
-	border-left: 1px solid #F40233;
+	border-left: 3px solid #F40233;
 }
 #main_menu ul li:hover #link_contact {
 	display:block;
