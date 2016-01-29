@@ -3,15 +3,11 @@
 		display:block;
 		width : 100%;
 		background-color:black;
-		top: 0;
-		bottom:0;
-		margin:0;
-		padding:0;
 	}
 	#main_menu a{
 		display: block;
 		text-align: center;
-		margin-top: 5px;
+		margin:0;	
 	}
 	#main_menu a img{
 
@@ -37,26 +33,20 @@
 		transform : rotate(90deg);
 	}
 	#menu_button:hover{
-	color: #02acf4;
-	cursor:pointer;
+		color: #02acf4;
+		cursor:pointer;
 	}
 	.content{
 		float: left;
-		background-color:red;
-		width :70%;
+		width :100%;
 	}
-
 }
 @media screen and (min-width: 768px) and (max-width:992px){
 	#main_menu{
 		display:block;
-		width : 12.5%;
+		width : 16.666666%;
 		float: left;
-		background-color:yellow;
-		top: 0;
-		bottom:0;
-		margin:0;
-		padding:0;
+		background-color:black;
 	}
 	#main_menu a{
 		display: block;
@@ -81,21 +71,22 @@
 	}
 	.content{
 		float: left;
-		background-color:red;
-		width :87.5%;
+		width :83.333334%;
+	}
+	#home_portfolio h2{
+		font-size:12rem;	
+	}
+	#home_contact h2{
+		font-size:12rem;
 	}
 
 }
 @media screen and (min-width: 992px) and (max-width:1199px){
 	#main_menu{
 		display:block;
-		width : 12.5%;
+		width : 16.666666%;
 		float: left;
 		background-color:black;
-		top: 0;
-		bottom:0;
-		margin:0;
-		padding:0;
 	}
 	#main_menu a img{
 		width : 50%;
@@ -103,21 +94,22 @@
 	}
 	.content{
 		float: left;
-		background-color:pink;
-		width :87.5%;
+		width :83.33333334%;
+	}
+	#home_portfolio h2{
+		font-size:12rem;	
+	}
+	#home_contact h2{
+		font-size:12rem;
 	}
 
 }
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1200px) and (orientation:landscape){
 	#main_menu{
 		display:block;
 		width : 12.5%;
 		float: left;
 		background-color: black;
-		top: 0;
-		bottom:0;
-		margin:0;
-		padding:0;
 	}
 	#main_menu a img{
 		width : 50%;
@@ -125,24 +117,50 @@
 	}
 	.content{
 		float: left;
-		background-color:red;
 		width :87.5%;
+	}
+	#home_portfolio h2{
+		font-size: 12rem;
+	}
+	#home_contact h2{
+		font-size: 12rem;
 	}
 }
 /* all */
+#main_menu{
+	padding-top:10px;
+}
 #main_menu a{
 	display: block;
 	text-align: center;
-	margin-top: 10px;
 	font-size:120%;
 	text-decoration:none;
-	color:#02ACF4;
+	//	color:#02ACF4;
+}
+#main_menu h4{
+	color:white;
+	text-align: center;
+	padding:0;
+	margin-bottom:0px;
+}
+#main_menu span{
+	color:white;
+	display:block;
+	margin:0;
+	padding:0;
+	text-align: center;
+}
+
+#main_menu p{
+	color:#f40233;
+	display:inline;
 }
 #main_menu ul{
 	padding:0;
 	list-style: none;
 	margin: 0 auto;
 	margin-top: 20px;
+	padding-bottom:10px;
 }
 #main_menu ul li{
 	margin:0;
@@ -151,13 +169,221 @@
 	text-align: center;
 }
 #main_menu ul li:hover{
-	background-color:#02ACF4;
+	//background-color:#02ACF4;
 	color:white;
 }
 #main_menu a:hover{
 	color:white;
 }
 #main_menu ul li a{
-	margin:10px;
+	margin-top: 10px;
 	padding:0;
+}
+#link_home{
+	color:white;
+}
+#link_portfolio{
+	color: #02ACF4;
+}
+#link_contact{
+	color: #f40233;
+}
+.breadCrumbWhite{
+	border-left: 1px solid white;
+}
+.breadCrumbBlue{
+	border-left: 1px solid #02ACF4;
+}
+.breadCrumbRed{
+	border-left: 1px solid #F40233;
+}
+#main_menu ul li:hover #link_contact {
+	display:block;
+	color: white;
+	background-color: #f40233;
+}
+#main_menu ul li:hover #link_home{
+	background-color:white;
+	color:black;
+}
+#main_menu ul li:hover #link_portfolio{
+	background-color:#02ACF4;
+	color: white;
+}
+#home_portfolio{
+	background-color: #02ACF4;
+	text-align: center;
+	float:left;
+	width: 100%;
+}
+#home_portfolio h2{
+	color:white;
+	margin:0;
+	padding:0;
+}
+#home_portfolio a:hover{
+	text-decoration: none;
+}
+#home_contact{
+	float:left;
+	width: 100%;
+	text-align: center;
+	background-color:#f40233;
+
+}
+#home_contact a:hover{
+	text-decoration:none;
+}
+#home_contact h2{
+	color:white;
+	margin:0;
+	padding:0;
+}
+html,body{
+	overflow-x:hidden;
+	font-family: sans-serif;
+}
+.content{
+
+	overflow:hidden;
+}
+.content:after{
+	clear:both;
+}
+/* animation */
+.anim_left_comming {
+	-webkit-animation: leftComming 1s 1;
+	animation: leftComming 1s 1;
+}
+@-webkit-keyframes leftComming{
+	from{
+		opacity: 0;
+		margin-left: 50px;
+	}
+	to{
+		opacity:1;
+		margin-left:0;
+	}
+}
+@keyframes leftComming{
+	from{
+		opacity: 0;
+		margin-left: 50px;
+	}
+	to{
+		opacity:1;
+		margin-left:0;
+	}
+}
+.anim_right_comming {
+	-webkit-animation: rightComming 1s 1;
+	animation: rightComming 1s 1;
+}
+@-webkit-keyframes rightComming{
+	from{
+		opacity: 0;
+		margin-left: -50px;
+	}
+	to{
+		opacity:1;
+		margin-left:0;
+	}
+}
+@keyframes rightComming{
+	from{
+		opacity: 0;
+		margin-left: -50px;
+	}
+	to{
+		opacity:1;
+		margin-left:0;
+	}
+}
+.anim_bg_blue:hover{
+	-webkit-animation: bgBlue 2s alternate infinite;
+	animation: bgBlue 2s alternate infinite;
+}
+@-webkit-keyframes bgBlue{
+	from{	
+		background-color:#02ACF4;
+		color:white;
+	}
+	to{
+		background-color:white;
+		color:#02ACF4;
+	}
+}
+@keyframes bgBlue{
+	from{	
+		background-color:#02ACF4;
+		color:white;
+	}
+	to{
+		background-color:white;
+		color:#02ACF4;
+	}
+}
+.anim_txt_blue:hover{
+	-webkit-animation: txtBlue 2s alternate infinite;
+	animation: txtBlue 2s alternate infinite;
+}
+@-webkit-keyframes txtBlue{
+	from{	
+		color:white;
+	}
+	to{
+		color:#02ACF4;
+	}
+}
+@keyframes txtBlue{
+	from{	
+		color:white;
+	}
+	to{
+		color:#02ACF4;
+	}
+}
+.anim_bg_red:hover{
+	-webkit-animation: bgRed 2s alternate infinite;
+	animation: bgRed 2s alternate infinite;
+}
+@-webkit-keyframes bgRed{
+	from{	
+		background-color:#f40233;
+		color:white;
+	}
+	to{
+		background-color:white;
+		color:#f40233;
+	}
+}
+@keyframes bgRed{
+	from{	
+		background-color:#f40233;
+		color:white;
+	}
+	to{
+		background-color:white;
+		color:#f40233;
+	}
+}
+.anim_txt_red:hover{
+	-webkit-animation: txtRed 2s alternate infinite;
+	animation: txtRed 2s alternate infinite;
+}
+@-webkit-keyframes txtRed{
+	from{	
+		color:white;
+	}
+	to{
+		color:#f40233;
+	}
+}
+@keyframes txtRed{
+	from{	
+		color:white;
+	}
+	to{
+		color:#f40233;
+	}
 }

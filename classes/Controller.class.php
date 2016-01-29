@@ -58,5 +58,5 @@ class Controller
 			return 'home';	
 		}
 	}
-}
 
+}

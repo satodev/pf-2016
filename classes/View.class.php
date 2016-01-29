@@ -62,4 +62,18 @@ class View
 		}
 		include_once('home.php');
 	}
+	public static function portfolioArticlePattern(){
+		$host = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/';
+		$work_dir = $_SERVER['DOCUMENT_ROOT'];
+		$pattern = '/^\.[a-z]*/';
+		$work_files = scandir($work_dir);
+		$response = array();
+		foreach($work_files as $f){
+			preg_match($pattern, $f, $match);
+			if($f != '.' && $f != '..' && $f != 'css' && $f != 'js' && $f != 'index.php' && $f!='pf-2016' &&!$match){
+			array_push($response, $host.''.$f);	
+			}
+		}
+		return $response;	
+	}
 }
