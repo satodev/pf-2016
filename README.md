@@ -24,3 +24,5 @@ Each project must have a README.md file that must contain Description title and 
 #Problems
 - [x] each page first call generate a 404 due to the .htaccess
 - [ ] fix url problem with URL rewritting (much check it when exporting the website)
+- [ ] chown | chgrp must be set manually by root to make the "mail" registery functionnal on /project_name/data/
+- [ ] enable the possibility to load external project (w/ Title, Link, Description

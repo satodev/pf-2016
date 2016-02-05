@@ -20,4 +20,19 @@ class Model
 		$pdo->prepare($sql);
 		$pdo->execute();
 	}
+	public function createMailTable()
+	{
+		$pdo = $this->pdo;
+		var_dump($pdo);
+		$sql = "CREATE TABLE smail(id int NOT NULL AUTO_INCREMENT, name varchar(255), email varchar(255), object varchar(255), message varchar(255), PRIMARY KEY(id))";
+		$pdo->prepare($sql);
+		$pdo->execute();
+	}
+	public function insertIntoMailTable($name, $email, $object, $message)
+	{
+		$pdo = $this->pdo;
+		$sql = "INSERT INTO `test_mail`(`name`, `email`, `object`, `message`) VALUES (".$name.",".$email.",".$object.",".$message.")";
+		$pdo->prepare($sql);
+		$pdo->execute();
+	}
 }

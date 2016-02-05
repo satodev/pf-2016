@@ -2,7 +2,8 @@ document.onreadystatechange = function(){
 	if(document.readyState == "complete"){
 		menu.init();
 		home.init();
-		portfolio.init();
+		contact.init();
+//		contact.disableForm();
 	}
 }
 var menu = {
@@ -136,85 +137,151 @@ var home ={
 	}
 
 }
-var portfolio = {
-	titles: [],
-	description: [],
-	links: [],
-	titles_content: [],
-	links_content : [],
-	content : null,
+var contact = {
+	input_valid : false,
+	textarea_valid : false,
 	init: function(){
-		if(home.getCurrentUrl() == 'portfolio'){
-			portfolio.getArticleElements();
-			console.log(portfolio.links[0]);
-			portfolio.defineDescriptionArticle(portfolio.description[0],portfolio.links[0]);
-		}
+		if(home.getCurrentUrl() == 'contact'){
+			contact.form();
+			contact.shortcut();
+		}	
 	},
-	getArticleElements : function(){
-		titles_array = [];
-		link_array = [];
-		titles = document.querySelectorAll('h2');
-		description = document.querySelectorAll('p');
-		links = document.querySelectorAll('.work_article_link');
-		for(var i = 0; i<titles.length; i++){
-			titles_array.push(titles[i].textContent);
-			link_array.push(links[i].getAttribute("href"));
-		}
-		portfolio.titles = titles;
-		portfolio.description = description;
-		portfolio.links = links;
-		portfolio.titles_content= titles_array;
-		portfolio.links_content = link_array;
+	form: function(){
+		contact.formInputValidator();
+		contact.formTextAreaValidator();
+		contact.formSubmitValidator();
+
 	},
-	verifArticleAuthenticity : function(article, link){
-		if(typeof article == "object"){
-			pattern = /description_(.*$)/ig;
-			result = pattern.exec(article.className);
-			if(article.previousSibling.textContent == result[1] && portfolio.verifLinkName(link)== result[1]){
-				console.log(article.previousSibling.textContent+' is equal to : '+result[1]);
-				return true;
-			}
-		}
-	},
-	verifLinkName : function(link){
-		pattern = /([a-zA-Z0-9-_]*)$/gmi;
-		result = pattern.exec(link.href);
-		return result[0];
-	},
-	defineDescriptionArticle : function(article, link){
-		if(portfolio.verifArticleAuthenticity(article, link) && portfolio.getDescriptionArticle(link)){
-			console.log('pass');
-			console.log(portfolio.content); 
-			article.innerHTML = ''; 
-		}
-	},
-	getFileResponseText:function(content){
-		if(content){
-			console.log('pass');
-			console.log(content);
-			return portfolio.content = content;
-			console.log(portfolio.content);
-		}
-	},
-	getDescriptionArticle : function(link){
-		file = new XMLHttpRequest();
-		total_link = link+'/README.md';
-		pattern = new RegExp("(?:#Description\n)([a-zA-Z\n-_(-è]*)(?:#)", "igm"); 
-		var data = null;
-		file.onreadystatechange = function(){
-			if(file.status == 200 && file.readyState == 4){
-				console.log(typeof file.responseText);
-				reg = pattern.exec(file.responseText);
-				for(i in reg){
-					if(i == 1){
-						data = reg[i];
-						portfolio.getFileResponseText(data);
+	formInputValidator : function(){
+		inputs = document.querySelectorAll('input');
+		name_valid = false;
+		email_valid = false;
+		object_valid = false;
+		for(var i = 0; i < inputs.length; i++){
+			inputs[i].oninput = function(){
+				if(this.name == 'Name'){
+					if(this.value.length < 20 && this.value.length > 0){
+						name_valid = true;
+					}else {
+						console.log(this.value.length);
+						name_valid = false;
 					}
+				}
+				if(this.name == 'email'){
+					pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+					result = pattern.exec(this.value);
+					if(result){
+						email_valid = true;	
+					}else{
+						email_valid = false;
+					}
+				}
+				if(this.name == 'object' ){
+					if(this.value.length > 0 && this.value.length < 50){
+						object_valid = true;	
+					}else{
+						object_valid = false;
+					}
+				}
+				if(name_valid && email_valid && object_valid){
+					contact.input_valid = true;
+				}else{
+					contact.input_valid = false;
 				}
 			}
 		}
-		file.open('GET', total_link, true); 
-		file.send();
-		return true;
+	},
+	formTextAreaValidator : function(){
+		textarea = document.querySelectorAll('textarea');
+		textarea[0].oninput = function(){
+			if(textarea[0].value.length > 0 && textarea[0].value.length < 5000){
+				console.log('if pass');
+				contact.textarea_valid = true;	
+			}else if(textarea[0].value.length == 0 || textarea[0].value.length > 5000){
+				console.log('else if pass');
+				contact.textarea_valid = false;
+			}
+		}
+	},
+	formSubmitValidator : function(){
+		console.log('pass');
+		submit = document.querySelectorAll('button[name="submit"]');
+			console.log(contact.input_valid+ '' + contact.textarea_valid);
+			if(contact.input_valid && contact.textarea_valid){
+				contact.validForm();
+			}
+		submit[0].onclick = function(){
+			console.log(contact.input_valid+ '' + contact.textarea_valid);
+			if(contact.input_valid && contact.textarea_valid){
+				contact.validForm();
+			}
+		}
+	},
+	shortcut : function(){
+		contact.shortKeyShiftEnter();
+	},
+	shortKeyShiftEnter : function(){
+		shift = false;
+		document.onkeyup = function(e){
+			if(e.which == 16){
+				shift =false;
+			}
+		}
+		document.onkeydown = function(e){
+			if(e.which == 16) {
+				shift = true;
+			}
+			if(e.which == 13 && shift){
+				contact.formSubmitValidator();
+			}
+		}
+	},
+	validForm : function(){
+		var name_input = document.querySelectorAll('input[name="Name"]');
+		var email_input = document.querySelectorAll('input[name="email"]');
+		var subject_input = document.querySelectorAll('input[name="object"]');
+		var message = document.querySelectorAll('textarea');
+		var jmail = {
+			from : email_input[0].value,
+			to: 'hemmi.satoru@gmail.com',
+			name: name_input[0].value,
+			object : subject_input[0].value,
+			msg : message[0].value
+		}
+		contact.sendmail(jmail);
+		contact.disableForm();
+	},
+	disableForm: function(){
+		input = document.querySelectorAll('input');
+		for (var i = 0; i < input.length; i++){
+				input[i].value = '';
+				input[i].className = 'disabled';
+				input[i].readOnly= true;
+		}
+		textarea= document.getElementsByTagName('textarea'); 
+			textarea[0].value = '';
+			textarea[0].className = 'disabled';
+			textarea[0].readOnly = true;
+		submit = document.getElementsByTagName('button');
+		submit[0].disable = true;
+		submit[0].readOnly = true;
+		submit[0].className = 'disable';
+		submit[0].innerHTML = 'Disabled';
+	},
+	sendmail : function(object){
+		if(object){
+			var xml = new XMLHttpRequest();
+			xml.onreadystatechange = function(){
+				if(xml.readyState == 4 && xml.status == 200){
+					content = document.getElementsByClassName('contact_form');
+					content[0].innerHTML += xml.responseText;
+				}
+			}
+			xml.open('POST', 'public/send_mail.php', true);
+			xml.setRequestHeader('Content-type','application/x-www-form-urlencoded; charset=UTF-8');
+			xml.send('data='+JSON.stringify(object));
+		}
 	}
 }
+
+

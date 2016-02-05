@@ -67,13 +67,31 @@ class View
 		$work_dir = $_SERVER['DOCUMENT_ROOT'];
 		$pattern = '/^\.[a-z]*/';
 		$work_files = scandir($work_dir);
-		$response = array();
+		$links = array();
+		$description = array();
+		$desc_array = array();
+		$titles = array();
 		foreach($work_files as $f){
 			preg_match($pattern, $f, $match);
 			if($f != '.' && $f != '..' && $f != 'css' && $f != 'js' && $f != 'index.php' && $f!='pf-2016' &&!$match){
-			array_push($response, $host.''.$f);	
+				$handle = fopen($_SERVER['CONTEXT_DOCUMENT_ROOT'].''.$f.'/README.md',"r");
+				$content = fread($handle, filesize($_SERVER['CONTEXT_DOCUMENT_ROOT'].''.$f.'/README.md'));
+				fclose($handle);
+				array_push($titles, $f);
+				array_push($description, $content);
+				array_push($links, $host.''.$f);	
 			}
 		}
+		foreach($description as $desc){
+			$pattern = '/(?:#Description\n)([a-zA-Z\n-_(-è]*)(?:\n#)/';
+			preg_match($pattern, $desc, $rd);
+			array_push($desc_array, $rd[1]);	
+		}
+		$response = array(
+			"titles" => $titles,
+			"desc" => $desc_array,
+			"links" => $links
+		);
 		return $response;	
 	}
 }

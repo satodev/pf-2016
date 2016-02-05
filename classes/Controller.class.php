@@ -5,6 +5,7 @@ class Controller
 	{
 		$this->loadAllClasses();
 		$this->viewController();
+		$this->modelController();
 	}
 	public function loadAllClasses()
 	{
@@ -58,5 +59,4 @@ class Controller
 			return 'home';	
 		}
 	}
-
 }
