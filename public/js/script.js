@@ -3,7 +3,7 @@ document.onreadystatechange = function(){
 		menu.init();
 		home.init();
 		contact.init();
-//		contact.disableForm();
+		portfolio.init();
 	}
 }
 var menu = {
@@ -137,6 +137,59 @@ var home ={
 	}
 
 }
+var portfolio = {
+	heights : 0,
+	init : function(){
+		if(home.getCurrentUrl() == 'portfolio'){
+			work_article = document.getElementsByClassName('work_article');
+			portfolio.scrollDetector();
+			portfolio.heightAdjust();
+			portfolio.heightModifier();
+			portfolio.wmHeightAdjust();
+			portfolio.wmScrollDetector();
+		}
+	},
+	scrollDetector : function(){
+		html = document.getElementsByTagName('html');
+		content = document.getElementsByClassName('portfolio');
+		if(window.innerHeight < content[0].clientHeight){	
+			html[0].style.overflowY = 'scroll';
+		}
+	},
+	wmScrollDetector : function(){
+		window.onresize = function(){
+			portfolio.scrollDetector();
+		}
+	},
+	heightModifier : function(){
+		if(portfolio.heights && portfolio.heights > 0){
+			for(i in work_article){
+				if(typeof i == 'string' && i.length == 1){
+					work_article[i].style.height = portfolio.heights+'px';
+				}
+			}
+		}
+	},
+	wmHeightAdjust: function(){
+		window.onresize = function(){
+			portfolio.heightAdjust();
+			portfolio.heightModifier();
+		}
+	},
+	heightAdjust : function(){
+		var heights = 0;
+		for(i in work_article){
+			if(typeof i == 'string' && i.length == 1){
+				if(work_article[i].offsetHeight > heights){
+					heights =  work_article[i].clientHeight;
+				}
+			}	
+		}
+		if(heights > portfolio.heights){
+			portfolio.heights = heights;
+		}
+	}
+}
 var contact = {
 	input_valid : false,
 	textarea_valid : false,
@@ -144,6 +197,7 @@ var contact = {
 		if(home.getCurrentUrl() == 'contact'){
 			contact.form();
 			contact.shortcut();
+			contact.generateMap();
 		}	
 	},
 	form: function(){
@@ -206,10 +260,10 @@ var contact = {
 	formSubmitValidator : function(){
 		console.log('pass');
 		submit = document.querySelectorAll('button[name="submit"]');
-			console.log(contact.input_valid+ '' + contact.textarea_valid);
-			if(contact.input_valid && contact.textarea_valid){
-				contact.validForm();
-			}
+		console.log(contact.input_valid+ '' + contact.textarea_valid);
+		if(contact.input_valid && contact.textarea_valid){
+			contact.validForm();
+		}
 		submit[0].onclick = function(){
 			console.log(contact.input_valid+ '' + contact.textarea_valid);
 			if(contact.input_valid && contact.textarea_valid){
@@ -248,25 +302,25 @@ var contact = {
 			object : subject_input[0].value,
 			msg : message[0].value
 		}
-		contact.sendmail(jmail);
-		contact.disableForm();
+		contact.sendmail(jmail)
+			contact.disableForm();
 	},
 	disableForm: function(){
 		input = document.querySelectorAll('input');
 		for (var i = 0; i < input.length; i++){
-				input[i].value = '';
-				input[i].className = 'disabled';
-				input[i].readOnly= true;
+			input[i].value = '';
+			input[i].className = 'disabled';
+			input[i].readOnly= true;
 		}
 		textarea= document.getElementsByTagName('textarea'); 
-			textarea[0].value = '';
-			textarea[0].className = 'disabled';
-			textarea[0].readOnly = true;
+		textarea[0].value = '';
+		textarea[0].className = 'disabled';
+		textarea[0].readOnly = true;
 		submit = document.getElementsByTagName('button');
 		submit[0].disable = true;
 		submit[0].readOnly = true;
 		submit[0].className = 'disable';
-		submit[0].innerHTML = 'Disabled';
+		submit[0].innerHTML = 'Message Envoyé';
 	},
 	sendmail : function(object){
 		if(object){
@@ -280,8 +334,22 @@ var contact = {
 			xml.open('POST', 'public/send_mail.php', true);
 			xml.setRequestHeader('Content-type','application/x-www-form-urlencoded; charset=UTF-8');
 			xml.send('data='+JSON.stringify(object));
+			return true;
+		}
+	},
+	generateMap : function(){
+		main_container = document.getElementsByClassName('content');
+		container = document.getElementsByClassName('google_map');
+		var data = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2437.422733067647!2d2.3098763310561847!3d48.88286995392807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fbbd1a22ed5%3A0x2622119329a2496a!2sMalesherbes!5e0!3m2!1sfr!2sfr!4v1454457137547" width="'+main_container[0].clientWidth+'" height="410" frameborder="0" style="border:0" allowfullscreen></iframe>';
+		if(window.innerWidth > 768){
+			container[0].innerHTML = data;
+		}else{
+			container[0].innerHTML = '';	
+		}
+		window.onresize = function(){
+			contact.generateMap();
 		}
 	}
-}
 
+}
 

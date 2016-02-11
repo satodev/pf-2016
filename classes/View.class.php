@@ -94,4 +94,24 @@ class View
 		);
 		return $response;	
 	}
+	public static function portfolioExternalArticlePattern(){
+		$titles = [];
+		$desc = [];
+		$links = [];
+		$url  = '/var/www/pf-2016/external_site.json';
+		$handle = fopen($url, 'r') or die('nope');
+		$string= stream_get_contents($handle);
+		$json= json_decode($string, true);
+		foreach ($json as $j) {
+			array_push($titles, $j['title']);
+			array_push($desc , $j['description']);
+			array_push($links, $j['link']);
+		}
+		$array_list  = array (
+			"titles" => $titles,
+			"desc" => $desc,
+			"links" => $links
+		);
+		return $array_list;	
+	}
 }
